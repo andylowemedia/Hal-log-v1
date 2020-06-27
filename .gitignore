@@ -1,0 +1,4 @@
+/node-app/coverage/
+/node-app/**/*.js
+/.idea/
+node_modules/

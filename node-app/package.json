@@ -1,0 +1,51 @@
+{
+  "name": "hal-log-app",
+  "version": "1.0.0",
+  "description": "Hal Project Log Microservice",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jest --collectCoverage",
+    "tsc": "tsc",
+    "start": "npm run tsc && node server/server.js"
+  },
+  "author": "Andy Lowe <andylowe@low-emedia.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.7.1",
+    "@types/axios": "^0.14.0",
+    "@types/body-parser": "^1.19.0",
+    "@types/express": "^4.17.6",
+    "@types/mysql2": "github:types/mysql2",
+    "aws-sdk": "^2.701.0",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@types/cors": "^2.8.6",
+    "@types/jest": "^26.0.0",
+    "@types/sinon": "^9.0.4",
+    "cors": "^2.8.5",
+    "jest": "^26.0.1",
+    "jest-cucumber": "^2.0.11",
+    "sinon": "^9.0.2",
+    "ts-jest": "^26.1.0",
+    "ts-sinon": "^1.2.0",
+    "tsd": "^0.11.0",
+    "typescript": "^3.9.5"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
+  }
+}
