@@ -1,17 +1,25 @@
 import express from 'express';
-import mysql from 'mysql2/promise';
+import LoadArticleServiceFactory from "../../Services/Articles/LoadArticleServiceFactory";
 import LoadArticleService from "../../Services/Articles/LoadArticleService";
-import {Client} from '@elastic/elasticsearch';
 
+export default async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const loadArticleService = LoadArticleServiceFactory();
 
-export default class ListHandler {
-  public async handle(req: express.Request, res: express.Response) {
+    const options = {
+      size: req.query.hasOwnProperty('size') && typeof req.query.size === 'string' ? parseInt(req.query.size) : 50
+    }
 
-    // const loadArticleService = new LoadArticleService(mysql);
+    const data = await loadArticleService.load(options);
 
     res.json({
-      "success": true,
-      "data": [] // await loadArticleService.load()
+      success: true,
+      message: 'Found ' + data.count + ' record(s)',
+      total: data.total,
+      count: data.count,
+      results: data.results
     });
+  } catch (error) {
+    return next(error);
   }
 }

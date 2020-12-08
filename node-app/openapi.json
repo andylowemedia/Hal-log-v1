@@ -1,0 +1,256 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "The Hal Project Log Microservice",
+    "version": "0.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://hal-log-v1.discovery:9090/"
+    }
+  ],
+  "paths": {
+    "/health-check": {
+      "get": {
+        "summary": "Health check",
+        "tags": [
+          "Logs"
+        ],
+        "operationId": "Handler\\HealthCheckHandler::handle",
+        "responses": {
+          "200": {
+            "description": "Health check",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Status of request",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Message of status of request",
+                      "example": "Log Microservice Health check"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/article": {
+      "get": {
+        "summary": "Log article list",
+        "tags": [
+          "Logs"
+        ],
+        "operationId": "Handler\\Articles\\ListHandler::handle",
+        "responses": {
+          "200": {
+            "description": "List of article logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Status of request",
+                      "example": true
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "Data of request",
+                      "example": [
+                        {
+                          "id": 1,
+                          "source_id": 1,
+                          "url": "something.com",
+                          "message": "something happened",
+                          "status_id": 4,
+                          "date": "2020-09-01T00:00:00.000Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add log article",
+        "tags": [
+          "Logs"
+        ],
+        "operationId": "Handler\\Articles\\AddHandler::handle",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "sourceId": {
+                    "type": "integer"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "statusId": {
+                    "type": "integer"
+                  },
+                  "date": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "sourceId": 1,
+                  "url": "something.com",
+                  "message": "something happened",
+                  "statusId": 4,
+                  "date": "2020-09-01 00:00:00"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Add article log",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Status of request",
+                      "example": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "description": "Error object for request (should be empty on successful requests)",
+                      "example": null
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "Data saved from request",
+                      "example": {
+                        "id": 1,
+                        "sourceId": 1,
+                        "url": "something.com",
+                        "message": "something happened",
+                        "statusId": 4,
+                        "date": "2020-09-01 00:00:00"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request for add article log",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Status of request",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Message of status of request",
+                      "example": "`SourceID` is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unknown error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Status of request",
+                      "example": false
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Message of status of request",
+                      "example": "error"
+                    },
+                    "error": {
+                      "type": "object",
+                      "description": "Error object for request. Will vary according to the kind of error that occurs",
+                      "example": {
+                        "message": "Incorrect datetime value: 'something' for column 'date' at row 1",
+                        "code": "ER_TRUNCATED_WRONG_VALUE",
+                        "errno": 1292,
+                        "sqlState": "22007",
+                        "sqlMessage": "Incorrect datetime value: 'something' for column 'date' at row 1"
+                      }
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "Data from failed request (should be empty on unknown error requests)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/article/report": {
+      "get": {
+        "summary": "Log article report",
+        "tags": [
+          "Logs"
+        ],
+        "operationId": "Handler\\Articles\\ReportHandler::handle",
+        "responses": {
+          "200": {
+            "description": "Report of article logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "Status of request",
+                      "example": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request for add article log"
+          }
+        }
+      }
+    }
+  }
+}

@@ -6,4 +6,4 @@ VOLUME /usr/src/app/
 
 WORKDIR /usr/src/app/
 
-CMD [ "tail", "-f", "/dev/null"]
+CMD [ "npm", "install", "&&", "npm", "run", "start"]

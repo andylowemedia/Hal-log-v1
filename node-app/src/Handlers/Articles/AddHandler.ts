@@ -1,15 +1,18 @@
 import express from "express";
-import AddArticleService from "../../Services/Articles/AddArticleService";
-import mysql from "mysql2/promise";
+import AddArticleServiceFactory from "../../Services/Articles/AddArticleServiceFactory";
 
-export default class AddHandler {
-  public async handle(req: express.Request, res: express.Response) {
+export default async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  try {
+    const addArticleService = AddArticleServiceFactory();
+    const results = await addArticleService.add(req.body);
 
-    const results = await (new AddArticleService(mysql)).add(req.body);
-
+    res.statusCode = 201;
     res.json({
-      "success": results.message !== 'error',
-      "data": results
+      "success": true,
+      "message": "Record ID " + results.data.id + " successfully added",
+      "data": results.data
     });
+  } catch (error) {
+    next(error);
   }
 }
