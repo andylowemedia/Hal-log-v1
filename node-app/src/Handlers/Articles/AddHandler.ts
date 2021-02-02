@@ -6,6 +6,10 @@ export default async (req: express.Request, res: express.Response, next: express
     const addArticleService = AddArticleServiceFactory();
     const results = await addArticleService.add(req.body);
 
+    if (results.hasOwnProperty('error') && results.error) {
+      throw results.error;
+    }
+
     res.statusCode = 201;
     res.json({
       "success": true,

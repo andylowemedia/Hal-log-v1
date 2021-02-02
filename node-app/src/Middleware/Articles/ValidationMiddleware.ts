@@ -1,6 +1,14 @@
 import express from "express";
 
 export default (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
+    res.statusCode = 400;
+    return res.json({
+      "success": false,
+      "message": "JSON body is empty"
+    });
+  }
+
   if (!req.body.hasOwnProperty('sourceId') || isNaN(req.body.sourceId)) {
     res.statusCode = 400;
     return res.json({

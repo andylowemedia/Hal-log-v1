@@ -12,7 +12,7 @@ export default class AddArticleService {
 
   public async add(requestData: { sourceId: number, url: string, message: string, statusId: number, date: string})  {
 
-    let message: { message: string, error: any, data: {} } = {
+    let message: { message: string, error: any, data: any } = {
       message: "",
       error: null,
       data: {}
