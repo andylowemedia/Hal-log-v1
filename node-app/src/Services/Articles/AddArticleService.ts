@@ -53,7 +53,7 @@ export default class AddArticleService {
       message.error = e;
       message.message = "error";
     }
-
+    dbConnection.end();
     return message;
   }
 

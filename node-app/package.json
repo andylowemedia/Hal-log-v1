@@ -7,9 +7,9 @@
     "test-tdd": "./node_modules/.bin/jest --collectCoverage ./node_modules/.bin/jest __tests__/TDD/",
     "test-bdd": "./node_modules/.bin/jest ./node_modules/.bin/jest __tests__/BDD/",
     "tsc": "tsc",
-    "start": "npm run tsc && node server/server.js",
-    "db-import": "npm run tsc && node server/databaseImporter.js",
-    "db-drop": "npm run tsc && node server/dropData.js"
+    "start": "npm run tsc && node dist/server/server.js",
+    "db-import": "npm run tsc && node dist/server/databaseImporter.js",
+    "db-drop": "npm run tsc && node dist/server/dropData.js"
   },
   "author": "Andy Lowe <andylowe@low-emedia.com>",
   "license": "ISC",

@@ -46,7 +46,6 @@ services:
       - "9302:9300"
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
-      - ./elasticsearch/data:/usr/share/elasticsearch/data
     depends_on:
       - mysql
     environment:
