@@ -8,8 +8,14 @@ import ArticleReportHandler from "../src/Handlers/Articles/ReportHandler";
 import SiteAnalyticsAddHandler from "../src/Handlers/Site/Analytics/AddHandler"
 import SiteAnalyticsUpdateHandler from "../src/Handlers/Site/Analytics/UpdateHandler"
 import Container from "../src/Services/Container";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "../openapi.json";
+
 
 const router = express.Router();
+
+    router.use('/api-docs', swaggerUi.serve);
+    router.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
     router.get('/health-check', (new HealthCheckHandler()).handle);
     router.get(

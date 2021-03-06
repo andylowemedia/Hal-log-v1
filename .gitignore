@@ -1,6 +1,6 @@
 /node-app/coverage/
-/node-app/**/*.js
-/node-app/**/*.js.map
 /.idea/
 node_modules/
 /elasticsearch/data/
+/node-app/dist/
+/node-app/.env

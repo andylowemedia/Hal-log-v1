@@ -32,7 +32,7 @@ export default async () => {
 
 
   await elasticsearchConnection.indices.create({
-    index: "articles",
+    index: "log-articles",
     body: {
       settings: {
         index: {
@@ -87,7 +87,7 @@ export default async () => {
 
 const saveElasticsearch = async (connection: any, data: { id: number, sourceId: number, url: string, message: string, statusId: number, date: string}) => {
   let params = {
-    index: 'articles',
+    index: 'log-articles',
     id: data.id,
     body: {
       sourceId: data.sourceId,

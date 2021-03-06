@@ -59,7 +59,7 @@ export default class AddArticleService {
 
   private async saveElasticsearch(data: { id: number, sourceId: number, url: string, message: string, statusId: number, date: string}) {
     let params = {
-      index: 'articles',
+      index: 'log-articles',
       id: data.id,
       body: {
         sourceId: data.sourceId,

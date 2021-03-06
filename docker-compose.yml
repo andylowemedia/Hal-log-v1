@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 services:
   node-app:
     container_name: 'hal-log-node-app'
@@ -9,7 +9,7 @@ services:
       - "8086:80"
     volumes:
       - ./node-app:/usr/src/app
-    command: [ "tail", "-f", "/dev/null"]
+    command: [ "tail", "-f", "/dev/null" ]
     environment:
       NODE_ENV: "development"
       ELASTICSEARCH_HOST: "http://hal-log-elasticsearch:9200"
@@ -68,19 +68,19 @@ services:
     ports:
       - "5601:5601"
 
-  swagger:
-    container_name: hal-log-swagger
-    image: swaggerapi/swagger-ui
-    volumes:
-      - ./node-app:/app:cached
-
-    ports:
-      - "8079:8080"
-
-    environment:
-      SWAGGER_JSON: '/app/openapi.json'
-      BASE_URL: '/'
-
+#  swagger:
+#    container_name: hal-log-swagger
+#    image: swaggerapi/swagger-ui
+#    volumes:
+#      - ./node-app:/app:cached
+#
+#    ports:
+#      - "8079:8080"
+#
+#    environment:
+#      SWAGGER_JSON: '/app/openapi.json'
+#      BASE_URL: '/'
+#
   # docker run -d -p 80:8080 swaggerapi/swagger-editor
 
 networks:
