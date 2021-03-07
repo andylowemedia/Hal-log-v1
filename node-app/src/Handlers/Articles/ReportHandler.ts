@@ -4,7 +4,7 @@ const { Client } = require('@elastic/elasticsearch')
 export default class ReportHandler {
   public async handle(req: express.Request, res: express.Response) {
     const query = {
-      index: "articles",
+      index: "log-articles",
       body: {
         size: 0,
         query: {

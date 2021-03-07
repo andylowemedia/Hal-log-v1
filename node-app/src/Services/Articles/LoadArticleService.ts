@@ -10,7 +10,7 @@ export default class LoadArticleService {
 
   public async load(options: { size?: number } = {}) {
     const {body} = await this.elasticsearchClient.search({
-      index: 'articles',
+      index: 'log-articles',
       size: options.hasOwnProperty('size') ? options.size : 50,
       body: {
         sort: { date : { order : "desc"}},
