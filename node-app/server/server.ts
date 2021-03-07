@@ -3,6 +3,9 @@ import routes from "../config/routes";
 import ErrorHandler from "../src/Handlers/Error/ErrorHandler";
 import NotFoundHandler from "../src/Handlers/Error/NotFoundHandler";
 import bodyParser from "body-parser";
+import DotEnv from "dotenv";
+
+DotEnv.config();
 
 // Create a new express app instance
 const app: express.Application = express();
